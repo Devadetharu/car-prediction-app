@@ -1,10 +1,18 @@
 import streamlit as st
 import pickle
 import numpy as np
+import os  # Add this
 
-# Load the model and scaler
-model = pickle.load(open('best_knn_model.pkl', 'rb'))
-scaler = pickle.load(open('scaler.pkl', 'rb'))
+# Get the directory where app.py is located
+base_path = os.path.dirname(__file__)
+
+# Join the paths correctly
+model_path = os.path.join(base_path, 'best_knn_model.pkl')
+scaler_path = os.path.join(base_path, 'scaler.pkl')
+
+# Load the model and scaler using the full path
+model = pickle.load(open(model_path, 'rb'))
+scaler = pickle.load(open(scaler_path, 'rb'))
 
 # Page configuration
 st.set_page_config(
@@ -101,4 +109,5 @@ if submitted:
 
 else:
     # Welcome message
+
     st.info("👈 Please fill in the car details in the sidebar and click 'Predict Price' to get an estimate.")
